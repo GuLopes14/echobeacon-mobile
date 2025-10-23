@@ -113,7 +113,7 @@ export default function EditarMotoScreen() {
             style={styles.input}
             value={modelo}
             onChangeText={setModelo}
-            placeholder="Ex: Honda CB 600"
+            placeholder="MOTTU_POP"
             placeholderTextColor="#666"
           />
         </View>
@@ -124,7 +124,7 @@ export default function EditarMotoScreen() {
             style={styles.input}
             value={placa}
             onChangeText={setPlaca}
-            placeholder="Ex: ABC-1234"
+            placeholder="ABC-1234"
             placeholderTextColor="#666"
             autoCapitalize="characters"
           />
@@ -136,7 +136,7 @@ export default function EditarMotoScreen() {
             style={styles.input}
             value={chassi}
             onChangeText={setChassi}
-            placeholder="Ex: 9BWHE21JX24060831"
+            placeholder="9BWHE21JX24060831"
             placeholderTextColor="#666"
           />
         </View>
