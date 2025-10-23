@@ -35,7 +35,6 @@ export default function CadastroMoto() {
     setLoading(true);
 
     try {
-      // Verificar se já existe uma moto com a mesma placa
       const placaTrimmed = placa.trim();
       const motosQuery = query(
         collection(db, "motos"),

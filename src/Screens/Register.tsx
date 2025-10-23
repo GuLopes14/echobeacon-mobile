@@ -11,7 +11,7 @@ import {
 import Form from "../Components/Forms";
 import { useAuth } from "../Contexts/AuthContext";
 import { RootStackParamList } from "../types/navigation";
-import { UserForm } from "../types/types";
+import { UserForm } from "../types";
 
 export default function Register() {
   const navigation =

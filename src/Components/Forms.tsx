@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { StyleSheet, Text, TextInput } from "react-native";
-import { UserForm } from "../types/types";
+import { UserForm } from "../types";
 
 type FormProps = {
   onUserChanged: (user: UserForm) => void;

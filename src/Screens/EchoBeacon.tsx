@@ -24,7 +24,7 @@ import {
 } from "react-native";
 import { db } from "../../firebaseConfig";
 import { RootStackParamList } from "../types/navigation";
-import { Moto } from "../types/types";
+import { Moto } from "../types";
 
 interface EchoBeacon {
   id: string;
@@ -122,15 +122,10 @@ export default function VincularEchoBeacon() {
         "Sucesso",
         `EchoBeacon ${echoBeaconSelecionado.codigo} vinculado à moto ${motoSelecionada.modelo} (${motoSelecionada.placa}) com sucesso!`,
         [
-          {
-            text: "OK",
-            onPress: () => {
-              navigation.reset({
-                index: 0,
-                routes: [{ name: "Tabs" }],
-              });
-            },
-          },
+         {
+          text: "OK",
+          onPress: () => navigation.goBack(),
+        },
         ]
       );
     } catch (error) {

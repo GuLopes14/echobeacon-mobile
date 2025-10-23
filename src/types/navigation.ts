@@ -1,4 +1,4 @@
-import { Moto } from "./types";
+import { Moto } from ".";
 
 export type RootStackParamList = {
   Login: undefined;

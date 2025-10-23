@@ -23,7 +23,7 @@ import {
 } from "react-native";
 import { db } from "../../firebaseConfig";
 import { RootStackParamList } from "../types/navigation";
-import { Moto } from "../types/types";
+import { Moto } from "../types";
 import { MqttContext } from "../mqtt/Context/MqttContext";
 
 export default function VisualizarMotosScreen() {
