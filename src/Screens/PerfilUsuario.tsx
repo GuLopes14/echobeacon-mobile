@@ -27,7 +27,7 @@ export default function PerfilUsuario() {
   const [senhaAtual, setSenhaAtual] = useState("");
   const [confirmarSenha, setConfirmarSenha] = useState("");
 
-  const handleLogout = async () => {
+  const handleLogout = () => {
     Alert.alert("Logout", "Deseja realmente sair da sua conta?", [
       {
         text: "Cancelar",

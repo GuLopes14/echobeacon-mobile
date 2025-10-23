@@ -1,5 +1,6 @@
 import * as firebase from "firebase/auth";
 import { createContext, PropsWithChildren, useContext } from "react";
+import { useAuth } from "./AuthContext";
 
 type ProfileContextProps = {
   updatePassword: (
@@ -13,6 +14,8 @@ const ProfileContext = createContext<ProfileContextProps>(
 );
 
 const ProfileProvider = ({ children }: PropsWithChildren) => {
+  const { user: currentUser } = useAuth();
+
   const updatePassword = async (
     currentPassword: string,
     newPassword: string
@@ -26,7 +29,6 @@ const ProfileProvider = ({ children }: PropsWithChildren) => {
     }
 
     try {
-      const currentUser = firebase.getAuth().currentUser;
       if (!currentUser || !currentUser.email) {
         throw new Error("Usuário não autenticado");
       }
@@ -46,6 +48,8 @@ const ProfileProvider = ({ children }: PropsWithChildren) => {
           throw new Error("Senha atual incorreta.");
         case "auth/weak-password":
           throw new Error("A nova senha é muito fraca.");
+        case "auth/requires-recent-login":
+          throw new Error("Reautenticação requerida. Faça login novamente.");
         default:
           throw new Error("Erro ao atualizar senha. Tente novamente.");
       }

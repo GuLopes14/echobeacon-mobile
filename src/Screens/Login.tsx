@@ -20,12 +20,6 @@ export default function Login() {
 
   const [userForm, setUserForm] = useState<UserForm>();
 
-  useEffect(() => {
-    if (user) {
-      navigation.navigate("Tabs");
-    }
-  }, [user, navigation]);
-
   const fazerLogin = async () => {
     if (!userForm?.email || !userForm?.password) {
       Alert.alert("Atenção", "Preencha todos os campos");
@@ -34,7 +28,6 @@ export default function Login() {
 
     try {
       await login(userForm.email, userForm.password);
-      Alert.alert("Login", "Login feito com sucesso!");
     } catch (error: any) {
       Alert.alert("Erro", "Falha no login. Verifique suas credenciais.");
     }

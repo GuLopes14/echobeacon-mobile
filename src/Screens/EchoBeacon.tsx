@@ -32,7 +32,7 @@ interface EchoBeacon {
   disponivel: boolean;
 }
 
-export default function VincularEchoBeacon() {
+export default function EchoBeaconLink() {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
@@ -44,8 +44,8 @@ export default function VincularEchoBeacon() {
   const [motoSelecionada, setMotoSelecionada] = useState<Moto | null>(null);
   const [echoBeaconSelecionado, setEchoBeaconSelecionado] =
     useState<EchoBeacon | null>(null);
-  const [modalMotosVisible, setModalMotosVisible] = useState(false);
-  const [modalEchoBeaconsVisible, setModalEchoBeaconsVisible] = useState(false);
+  const [modalMotosVisiveis, setmodalMotosVisiveis] = useState(false);
+  const [modalEchoBeaconsVisiveis, setModalEchoBeaconsVisiveis] = useState(false);
 
   useEffect(() => {
     const motosQuery = query(
@@ -140,12 +140,12 @@ export default function VincularEchoBeacon() {
 
   const selecionarMoto = (moto: Moto) => {
     setMotoSelecionada(moto);
-    setModalMotosVisible(false);
+    setmodalMotosVisiveis(false);
   };
 
   const selecionarEchoBeacon = (echoBeacon: EchoBeacon) => {
     setEchoBeaconSelecionado(echoBeacon);
-    setModalEchoBeaconsVisible(false);
+    setModalEchoBeaconsVisiveis(false);
   };
 
   if (loading) {
@@ -173,7 +173,7 @@ export default function VincularEchoBeacon() {
         <Text style={styles.rotulo}>Moto</Text>
         <TouchableOpacity
           style={styles.seletor}
-          onPress={() => setModalMotosVisible(true)}
+          onPress={() => setmodalMotosVisiveis(true)}
         >
           <Text
             style={[
@@ -199,7 +199,7 @@ export default function VincularEchoBeacon() {
           style={styles.seletor}
           onPress={() =>
             echoBeaconsDisponiveis.length > 0 &&
-            setModalEchoBeaconsVisible(true)
+            setModalEchoBeaconsVisiveis(true)
           }
         >
           <Text
@@ -245,14 +245,14 @@ export default function VincularEchoBeacon() {
       <Modal
         animationType="slide"
         transparent={true}
-        visible={modalMotosVisible}
-        onRequestClose={() => setModalMotosVisible(false)}
+        visible={modalMotosVisiveis}
+        onRequestClose={() => setmodalMotosVisiveis(false)}
       >
         <View style={styles.modalOverlay}>
           <View style={styles.modalContent}>
             <View style={styles.modalHeader}>
               <Text style={styles.modalTitulo}>Selecionar Moto</Text>
-              <TouchableOpacity onPress={() => setModalMotosVisible(false)}>
+              <TouchableOpacity onPress={() => setmodalMotosVisiveis(false)}>
                 <Ionicons name="close" size={24} color="#fff" />
               </TouchableOpacity>
             </View>
@@ -286,15 +286,15 @@ export default function VincularEchoBeacon() {
       <Modal
         animationType="slide"
         transparent={true}
-        visible={modalEchoBeaconsVisible}
-        onRequestClose={() => setModalEchoBeaconsVisible(false)}
+        visible={modalEchoBeaconsVisiveis}
+        onRequestClose={() => setModalEchoBeaconsVisiveis(false)}
       >
         <View style={styles.modalOverlay}>
           <View style={styles.modalContent}>
             <View style={styles.modalHeader}>
               <Text style={styles.modalTitulo}>Selecionar EchoBeacon</Text>
               <TouchableOpacity
-                onPress={() => setModalEchoBeaconsVisible(false)}
+                onPress={() => setModalEchoBeaconsVisiveis(false)}
               >
                 <Ionicons name="close" size={24} color="#fff" />
               </TouchableOpacity>

@@ -13,18 +13,12 @@ import { useAuth } from "../Contexts/AuthContext";
 import { RootStackParamList } from "../types/navigation";
 import { UserForm } from "../types";
 
-export default function Register() {
+export default function NewAccount() {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const { user, createAccount } = useAuth();
 
   const [userForm, setUserForm] = useState<UserForm>();
-
-  useEffect(() => {
-    if (user) {
-      navigation.navigate("Tabs");
-    }
-  }, [user, navigation]);
 
   const criarConta = async () => {
     if (!userForm?.email || !userForm?.password) {
@@ -34,7 +28,6 @@ export default function Register() {
 
     try {
       await createAccount(userForm.email, userForm.password);
-      Alert.alert("Sucesso", "Conta criada com sucesso!");
     } catch (error: any) {
       let errorMessage = "Erro ao criar conta. Tente novamente.";
 

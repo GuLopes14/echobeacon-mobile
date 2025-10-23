@@ -1,4 +1,5 @@
 import { Ionicons } from "@expo/vector-icons";
+import IconButton from "../Components/IconButton";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import {
@@ -26,27 +27,22 @@ import { RootStackParamList } from "../types/navigation";
 import { Moto } from "../types";
 import { MqttContext } from "../mqtt/Context/MqttContext";
 
-export default function VisualizarMotosScreen() {
+export default function MotoView() {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const [motos, setMotos] = useState<Moto[]>([]);
   const [loading, setLoading] = useState(true);
   const [modalVisivel, setModalVisivel] = useState(false);
-  const [motoSelecionada, setMotoSelecionada] = useState<Moto | undefined>(
-    undefined
-  );
+  const [motoSelecionada, setMotoSelecionada] = useState<Moto>();
 
   useEffect(() => {
     const unsubscribe = onSnapshot(
       collection(db, "motos"),
       (querySnapshot) => {
-        const motosData: Moto[] = [];
-        querySnapshot.forEach((doc) => {
-          motosData.push({
-            id: doc.id,
-            ...doc.data(),
-          } as Moto);
-        });
+        const motosData: Moto[] = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...(doc.data() as any),
+        } as Moto));
         setMotos(motosData);
         setLoading(false);
       },
@@ -72,7 +68,7 @@ export default function VisualizarMotosScreen() {
     navigation.navigate("EditarMoto", { moto });
   };
 
-  const removerMoto = async (moto: Moto) => {
+  const removerMoto = (moto: Moto) => {
     Alert.alert(
       "Confirmar Remoção",
       `Tem certeza que deseja remover a moto ${moto.modelo} (${moto.placa})?`,
@@ -113,10 +109,7 @@ export default function VisualizarMotosScreen() {
 
   const localizarMoto = (moto?: Moto) => {
     if (!moto) return;
-    // preferir o código/numero de identificação do EchoBeacon vinculado à moto
-    // quando a moto foi vinculada pelo fluxo `EchoBeacon.tsx` o campo salvo é `echoBeaconCodigo`
     const numeroIdentificacao =
-      // @ts-ignore - o tipo Moto nem sempre tem echoBeaconCodigo declarado, então fazemos fallback
       (moto as any).echoBeaconCodigo || (moto as any).echoBeaconId || "";
 
     if (!numeroIdentificacao) {
@@ -134,7 +127,6 @@ export default function VisualizarMotosScreen() {
     };
 
     try {
-      // publicar como string — o firmware/wokwi deve validar numero_identificacao
       publish("fiap/iot/echobeacon/comando", JSON.stringify(payload));
       Alert.alert(
         "Comando enviado",
@@ -159,17 +151,11 @@ export default function VisualizarMotosScreen() {
 
       <View style={styles.acoesMoto}>
         {moto.status === "recepcao" ? (
-          <TouchableOpacity onPress={() => editarMoto(moto)}>
-            <Ionicons name="create-outline" size={20} color="#fff" />
-          </TouchableOpacity>
+          <IconButton icon="create-outline" onPress={() => editarMoto(moto)} accessibilityLabel="Editar moto" />
         ) : (
           <View style={styles.acoesContainer}>
-            <TouchableOpacity onPress={() => abrirModal(moto)}>
-              <Ionicons name="location" size={20} color="#fff" />
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => removerMoto(moto)}>
-              <Ionicons name="exit-outline" size={20} color="#fff" />
-            </TouchableOpacity>
+            <IconButton icon="location" onPress={() => abrirModal(moto)} accessibilityLabel="Localizar moto" />
+            <IconButton icon="exit-outline" onPress={() => removerMoto(moto)} accessibilityLabel="Remover moto" />
           </View>
         )}
       </View>

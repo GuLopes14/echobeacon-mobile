@@ -17,28 +17,28 @@ const Stack = createNativeStackNavigator();
 function AppContent() {
   const { user } = useContext(AuthContext);
 
+  const AuthStack = (
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="Login" component={Login} />
+      <Stack.Screen name="Cadastro" component={Register} />
+    </Stack.Navigator>
+  );
+
+  const AppStack = (
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="Tabs" component={TabNavigator} />
+      <Stack.Screen name="CadastrarEchoBeacon" component={CadastrarEchoBeacon} />
+      <Stack.Screen name="CadastroMoto" component={CadastroMoto} />
+      <Stack.Screen name="CadastroEchoBeacon" component={CadastroEchoBeacon} />
+      <Stack.Screen name="EditarMoto" component={EditarMoto} />
+    </Stack.Navigator>
+  );
+
   return (
     <ProfileProvider>
       <MqttProvider>
         <NavigationContainer>
-          <Stack.Navigator
-            screenOptions={{ headerShown: false }}
-            initialRouteName={user ? "Início" : "Login"}
-          >
-            <Stack.Screen name="Login" component={Login} />
-            <Stack.Screen name="Cadastro" component={Register} />
-            <Stack.Screen name="Tabs" component={TabNavigator} />
-            <Stack.Screen
-              name="CadastrarEchoBeacon"
-              component={CadastrarEchoBeacon}
-            />
-            <Stack.Screen name="CadastroMoto" component={CadastroMoto} />
-            <Stack.Screen
-              name="CadastroEchoBeacon"
-              component={CadastroEchoBeacon}
-            />
-            <Stack.Screen name="EditarMoto" component={EditarMoto} />
-          </Stack.Navigator>
+          {user ? AppStack : AuthStack}
         </NavigationContainer>
       </MqttProvider>
     </ProfileProvider>

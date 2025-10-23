@@ -15,10 +15,11 @@ import {
 } from "react-native";
 import { db } from "../../firebaseConfig";
 import { RootStackParamList } from "../types/navigation";
+import Select from "../Components/Select";
 
 type EditarMotoRouteProp = RouteProp<RootStackParamList, "EditarMoto">;
 
-export default function EditarMotoScreen() {
+export default function MotoForm() {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const route = useRoute<EditarMotoRouteProp>();
@@ -109,12 +110,11 @@ export default function EditarMotoScreen() {
       <ScrollView style={styles.formulario}>
         <View style={styles.campo}>
           <Text style={styles.label}>Modelo</Text>
-          <TextInput
-            style={styles.input}
-            value={modelo}
-            onChangeText={setModelo}
-            placeholder="MOTTU_POP"
-            placeholderTextColor="#666"
+          <Select
+            options={["MOTTU E", "MOTTU POP", "MOTTU SPORT"]}
+            selected={modelo}
+            onSelect={setModelo}
+            placeholder="Selecione o modelo"
           />
         </View>
 

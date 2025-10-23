@@ -16,6 +16,7 @@ import {
 } from "react-native";
 import { db } from "../../firebaseConfig";
 import { RootStackParamList } from "../types/navigation";
+import Select from "../Components/Select";
 
 export default function CadastroMoto() {
   const navigation =
@@ -109,13 +110,11 @@ export default function CadastroMoto() {
         />
 
         <Text style={styles.rotulo}>Modelo</Text>
-        <TextInput
-          style={styles.campo}
-          placeholder="MOTTU_POP"
-          placeholderTextColor="#999"
-          value={modelo}
-          onChangeText={setModelo}
-          autoCapitalize="words"
+        <Select
+          options={["MOTTU E", "MOTTU POP", "MOTTU SPORT"]}
+          selected={modelo}
+          onSelect={setModelo}
+          placeholder="Selecione o modelo"
         />
 
         <Text style={styles.rotulo}>Problema</Text>

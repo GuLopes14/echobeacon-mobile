@@ -12,18 +12,7 @@ const Tab = createBottomTabNavigator();
 export default function TabNavigator() {
   return (
     <Tab.Navigator
-      screenOptions={({ route }) => ({
-        tabBarIcon: ({ color, size }) => {
-          let iconName = "home";
-
-          if (route.name === "Início") iconName = "home";
-          if (route.name === "Motos") iconName = "bicycle";
-          if (route.name === "Adicionar") iconName = "add-circle";
-          if (route.name === "Perfil") iconName = "person";
-
-          return <Ionicons name={iconName as any} size={size} color={color} />;
-        },
-
+      screenOptions={{
         tabBarActiveTintColor: "#00FF00",
         tabBarInactiveTintColor: "gray",
         headerShown: false,
@@ -31,12 +20,44 @@ export default function TabNavigator() {
           backgroundColor: "#1e1e1e",
           borderTopColor: "#1e1e1e",
         },
-      })}
+      }}
     >
-      <Tab.Screen name="Início" component={HomeScreen} />
-      <Tab.Screen name="Motos" component={VisualizarMotosScreen} />
-      <Tab.Screen name="Adicionar" component={CadastrarEchoBeaconScreen} />
-      <Tab.Screen name="Perfil" component={PerfilUsuarioScreen} />
+      <Tab.Screen
+        name="Início"
+        component={HomeScreen}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="home" size={size} color={color} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Motos"
+        component={VisualizarMotosScreen}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="bicycle" size={size} color={color} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Adicionar"
+        component={CadastrarEchoBeaconScreen}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="add-circle" size={size} color={color} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Perfil"
+        component={PerfilUsuarioScreen}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="person" size={size} color={color} />
+          ),
+        }}
+      />
     </Tab.Navigator>
   );
 }
