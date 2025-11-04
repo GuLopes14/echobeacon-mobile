@@ -31,7 +31,7 @@ Este projeto foi desenvolvido com o objetivo de otimizar a **organização, gest
 - [FIGMA ECHOBEACON](https://www.figma.com/design/ed2FNPCmujOFAV0ZztdYcS/EchoBeacon---Sprint-1?node-id=0-1&p=f&t=UQNlcZBaC1OlCIHY-0)
 
 ### Link do vídeo de apresentação do app:
-- [VÍDEO DEMONSTRAÇÃO](https://youtu.be/Cz0d3vTXuL0)
+- [VÍDEO DEMONSTRAÇÃO](https://youtu.be/B2gzPBEGnck)
 
 ---
 
